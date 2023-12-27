@@ -50,11 +50,10 @@ const EditDelete = ({
   );
 };
 
-function OnboardUser({
-  onboard,
+function OnboardTrustee({
+  trustee,
   setShowUpdateModal,
   showUpdateModal,
-  trustee,
   setTrustee,
   setShowPasswordUpdateModal,
   setDeleteTrustee,
@@ -66,15 +65,15 @@ function OnboardUser({
       onMouseLeave={() => setOptionToggle(false)}
       className="grid grid-cols-4 text-center grid-body items-center p-3 my-2 odd:bg-[#ECEDFB] even:bg-white odd:border-none even:border border-[#ECEDFB] rounded-lg"
     >
-      <div>{onboard.name}</div>
-      <div className="lowercase">{onboard.email}</div>
-      <div>{onboard.phone_number}</div>
-      <div>{onboard.scholl_limit}</div>
+      <div>{trustee.name}</div>
+      <div className="lowercase">{trustee.email}</div>
+      <div>{trustee.phone_number}</div>
+      <div>{trustee.school_limit}</div>
       <div className="relative">
         <i
           className="fa-solid fa-ellipsis-vertical ml-auto cursor-pointer p-2"
           onClick={() => {
-            setTrustee(onboard);
+            setTrustee(trustee);
             setOptionToggle(!optionToggle);
           }}
         ></i>
@@ -99,7 +98,7 @@ function ManageTrustee() {
   const [showPasswordUpdateModal, setShowPasswordUpdateModal] =
     React.useState(false);
 
-  //const { data, loading, error } = useQuery(GET_ONBOARDERS);
+  //const { data, loading, error } = useQuery(GET_TRUSTEES);
   const [createTrustee, { data: result, loading: LOAD, error: _ERROR }] =
     useMutation(CREATE_TRUSTEE, {
       refetchQueries: [{ query: GET_TRUSTEES }],
@@ -128,11 +127,11 @@ function ManageTrustee() {
         className="max-w-lg w-full"
         open={showModal}
         setOpen={setShowModal}
-        title="Create Onboarder"
+        title="Create Trustee"
       >
         <Form
           onSubmit={async (data: any) => {
-            const onboarder = {
+            const trustee = {
               name: data["Name"],
               email: data["Email"],
               phone_number: data["Phone Number"],
@@ -397,7 +396,7 @@ function ManageTrustee() {
         onClick={() => setShowModal(!showModal)}
         className="px-4 py-2 mb-5 bg-[#6F6AF8] rounded-md text-white float-right"
       >
-        create new onboarder
+        create new Trustee
       </button>
       <div className="w-full mt-20">
         <div>
@@ -410,11 +409,10 @@ function ManageTrustee() {
                 <div className="text-center">school limit</div>
                 <div className="text-center">action</div>
               </div>
-              {trustees?.trustees?.map((onboard: any, i: number) => (
-                <OnboardUser
-                  onboard={onboard}
+              {trustees?.trustees?.map((trustee: any, i: number) => (
+                <OnboardTrustee
+                  trustee={trustee}
                   setTrustee={setTrustee}
-                  trustee = {trustee}
                   setDeleteUser={setDeleteUser}
                   setShowModal={setShowModal}
                   setShowUpdateModal={setShowUpdateModal}
