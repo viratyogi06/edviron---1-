@@ -376,7 +376,7 @@ function ManageTrustee() {
                   onClick={() => {
                     deleteOnborder({
                       variables: {
-                        id: user?._id,
+                        id: 1,
                       },
                     });
                     setDeleteUser(false);
@@ -426,4 +426,4 @@ function ManageTrustee() {
   );
 }
 
-export default ManageOnboarder;
+export default OnboardUser;
